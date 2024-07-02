@@ -1,6 +1,9 @@
-package com.web_is.User;
+package com.web_is.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "lecturers")
@@ -22,6 +25,23 @@ public class Lecturers {
 
     @Column(name = "lecturer_password")
     private String lecturerPassword;
+
+    @OneToMany(mappedBy = "lecturer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<LecturerCourse> lecturerCourses;
+
+    @Column(name = "role")
+    private String role = "lecturer"; // default role
+
+    // existing getters and setters
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public int getLecturerId(){
         return lecturerId;
@@ -61,6 +81,14 @@ public class Lecturers {
 
     public void setLecturerPassword(String lecturerPassword){
         this.lecturerPassword = lecturerPassword;
+    }
+
+    public List<LecturerCourse> getLecturerCourses() {
+        return lecturerCourses;
+    }
+
+    public void setLecturerCourses(List<LecturerCourse> lecturerCourses) {
+        this.lecturerCourses = lecturerCourses;
     }
 
 

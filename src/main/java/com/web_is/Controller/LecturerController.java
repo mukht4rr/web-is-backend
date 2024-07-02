@@ -1,7 +1,7 @@
 package com.web_is.Controller;
 
 import com.web_is.Service.LecturerService;
-import com.web_is.User.Lecturers;
+import com.web_is.Model.Lecturers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

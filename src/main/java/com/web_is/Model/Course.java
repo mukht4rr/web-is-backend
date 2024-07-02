@@ -1,6 +1,9 @@
-package com.web_is.User;
+package com.web_is.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "courses")
@@ -18,6 +21,21 @@ public class Course {
 
     @Column(name = "status")
     private String status;
+
+    @Column(name = "attendance_code")
+    private String attendanceCode;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<LecturerCourse> lecturerCourses;
+
+    public String getAttendanceCode() {
+        return attendanceCode;
+    }
+
+    public void setAttendanceCode(String attendanceCode) {
+        this.attendanceCode = attendanceCode;
+    }
 
     // Getter and Setter for courseId
     public int getCourseId() {
@@ -54,4 +72,13 @@ public class Course {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public List<LecturerCourse> getLecturerCourses() {
+        return lecturerCourses;
+    }
+
+    public void setLecturerCourses(List<LecturerCourse> lecturerCourses) {
+        this.lecturerCourses = lecturerCourses;
+    }
+
 }

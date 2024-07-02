@@ -17,7 +17,7 @@
 //import org.springframework.security.web.SecurityFilterChain;
 //
 //@Configuration
-////@EnableWebSecurity
+//@EnableWebSecurity
 //public class SecurityConfig {
 //
 //    @Autowired
@@ -26,42 +26,42 @@
 //    @Autowired
 //    private StudentService studentService;
 //
-////    @Bean
-////    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-////        http
-////                .csrf(AbstractHttpConfigurer::disable)
-////                .authorizeHttpRequests((requests) -> requests
-////                        .requestMatchers("*").permitAll()
-////                        .anyRequest().authenticated()
-////                )
-////                .formLogin((form) -> form
-////                        .loginPage("/auth/login")
-////                        .defaultSuccessUrl("/home", true)
-////                )
-////                .logout((logout) -> logout
-////                        .logoutUrl("/auth/logout")
-////                        .logoutSuccessUrl("/auth/login")
-////                );
-////        return http.build();
-////    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests((requests) -> requests
+//                        .requestMatchers("*").permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .formLogin((form) -> form
+//                        .loginPage("/auth/login")
+//                        .defaultSuccessUrl("/home", true)
+//                )
+//                .logout((logout) -> logout
+//                        .logoutUrl("/auth/logout")
+//                        .logoutSuccessUrl("/auth/login")
+//                );
+//        return http.build();
+//    }
 //
-////    @Bean
-////    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-////        return authenticationConfiguration.getAuthenticationManager();
-////    }
-////
-////    @Bean
-////    public UserDetailsService userDetailsService() {
-////        return (username) -> {
-////            User user = userService.findByUsername(username);
-////            if (user != null) {
-////                return user;
-////            }
-////            Student student = studentService.findByRegistrationNumber(username);
-////            if (student != null) {
-////                return student;
-////            }
-////            throw new UsernameNotFoundException("User not found");
-////        };
-////    }
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
+//
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return (username) -> {
+//            User user = userService.findByUsername(username);
+//            if (user != null) {
+//                return user;
+//            }
+//            Student student = studentService.findByRegistrationNumber(username);
+//            if (student != null) {
+//                return student;
+//            }
+//            throw new UsernameNotFoundException("User not found");
+//        };
+//    }
 //}

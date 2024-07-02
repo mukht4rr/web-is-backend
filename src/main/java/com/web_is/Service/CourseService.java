@@ -1,7 +1,7 @@
 package com.web_is.Service;
 
 import com.web_is.Respository.CourseRepository;
-import com.web_is.User.Course;
+import com.web_is.Model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +33,4 @@ public class CourseService {
     public long countCourses() {
         return courseRepository.count();
     }
-
 }

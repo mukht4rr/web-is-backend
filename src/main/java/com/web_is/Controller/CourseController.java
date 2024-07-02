@@ -1,7 +1,7 @@
 package com.web_is.Controller;
 
 import com.web_is.Service.CourseService;
-import com.web_is.User.Course;
+import com.web_is.Model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class CourseController {
     }
 
     //RETRIEVE ALL COURSES
-    @GetMapping("/get") // Change "/add" to something like "/get"
+    @GetMapping("/get")
     public List<Course> getCourse() {
         try {
             return courseService.getAllCourses();
@@ -71,6 +71,25 @@ public class CourseController {
         }
     }
 
+    // UPDATE THE ATTENDANCE CODE
+    @PutMapping("/updateAttendanceCode/{courseId}")
+    public ResponseEntity<Course> updateAttendanceCode(@PathVariable int courseId, @RequestBody Map<String, String> codeMap) {
+        try {
+            Optional<Course> optionalCourse = courseService.getCourseById(courseId);
+            if (optionalCourse.isPresent()) {
+                Course course = optionalCourse.get();
+                course.setAttendanceCode(codeMap.get("attendanceCode"));
+                Course updatedCourse = courseService.saveCourse(course);
+                return ResponseEntity.ok(updatedCourse);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception details for debugging
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
     //DELETE COURSE
     @DeleteMapping("/delete/{courseId}")
     public ResponseEntity<Void> deleteCourse(@PathVariable int courseId) {
@@ -82,7 +101,5 @@ public class CourseController {
             return ResponseEntity.status(500).build();
         }
     }
-
-
 
 }

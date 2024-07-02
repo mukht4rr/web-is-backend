@@ -1,7 +1,7 @@
 package com.web_is.Service;
 
 import com.web_is.Respository.LecturerRepository;
-import com.web_is.User.Lecturers;
+import com.web_is.Model.Lecturers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +13,10 @@ public class LecturerService {
 
     @Autowired
     private LecturerRepository lecturerRepository;
+
+    public Lecturers findByEmail(String lecturerEmail) {
+        return lecturerRepository.findByLecturerEmail(lecturerEmail);
+    }
 
     public List<Lecturers> getAllLecturers() {
         return lecturerRepository.findAll();
@@ -33,5 +37,4 @@ public class LecturerService {
     public long countLecturers() {
         return lecturerRepository.count();
     }
-
 }
