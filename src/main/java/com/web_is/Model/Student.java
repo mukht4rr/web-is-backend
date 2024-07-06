@@ -21,6 +21,11 @@ public class Student {
     @Column(name = "role")
     private String role = "student"; // default role
 
+    public Student(Long studentId) {
+    }
+
+    public Student(){}
+
     // existing getters and setters
 
     public String getRole() {
@@ -32,12 +37,12 @@ public class Student {
     }
 
     // Getter and Setter for id
-    public Long getId() {
+    public Long getStudent_id() {
         return student_id;
     }
 
-    public void setId(Long id) {
-        this.student_id = id;
+    public void setStudent_id(Long student_id) {
+        this.student_id = student_id;
     }
 
     // Getter and Setter for registrationNumber

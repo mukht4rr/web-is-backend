@@ -71,6 +71,7 @@ public class AuthController {
             session.setAttribute("lecturer", foundLecturer);
             response.put("message", "Login successful");
             response.put("role", "lecturer");
+            response.put("lecturerName", String.valueOf(foundLecturer.getLecturerName()));
             response.put("lecturerId", String.valueOf(foundLecturer.getLecturerId())); // Return lecturer ID
             return ResponseEntity.ok(response);
         } else {
@@ -94,7 +95,8 @@ public class AuthController {
             session.setAttribute("student", foundStudent);
             response.put("message", "Login successful");
             response.put("role", "student");
-            response.put("studentId", String.valueOf(foundStudent.getId()));
+            response.put("studentId", String.valueOf(foundStudent.getStudent_id()));
+            response.put("registrationNumber", foundStudent.getRegistrationNumber());
             response.put("studentName", foundStudent.getFullname());
             return ResponseEntity.ok(response);
         } else {

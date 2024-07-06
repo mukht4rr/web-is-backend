@@ -3,6 +3,7 @@ package com.web_is.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,9 +26,42 @@ public class Course {
     @Column(name = "attendance_code")
     private String attendanceCode;
 
+    @Column(name = "enrollment_key")
+    private String enrollmentKey;
+
+    @Column(name = "attendance_code_status")
+    private String attendanceCodeStatus;
+
+    @Column(name = "date")
+    private LocalDateTime date;
+
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<LecturerCourse> lecturerCourses;
+
+    public String getAttendanceCodeStatus() {
+        return attendanceCodeStatus;
+    }
+
+    public void setAttendanceCodeStatus(String attendanceCodeStatus) {
+        this.attendanceCodeStatus = attendanceCodeStatus;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getEnrollmentKey() {
+        return enrollmentKey;
+    }
+
+    public void setEnrollmentKey(String enrollmentKey) {
+        this.enrollmentKey = enrollmentKey;
+    }
 
     public String getAttendanceCode() {
         return attendanceCode;

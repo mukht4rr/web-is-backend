@@ -40,6 +40,18 @@ public class CourseController {
         }
     }
 
+    //GET ALL COURSES WHICH STATUS IS 'ACTIVE'
+    @GetMapping("/active")
+    public ResponseEntity<List<Course>> getActiveCourses() {
+        try {
+            List<Course> activeCourses = courseService.getCoursesByStatus("ACTIVE");
+            return ResponseEntity.ok(activeCourses);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception details for debugging
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
     //COUNT TOTAL COURSES
     @GetMapping("/count")
     public ResponseEntity<Long> getTotalCourse() {
@@ -72,14 +84,30 @@ public class CourseController {
     }
 
     // UPDATE THE ATTENDANCE CODE
+//    @PutMapping("/updateAttendanceCode/{courseId}")
+//    public ResponseEntity<Course> updateAttendanceCode(@PathVariable int courseId, @RequestBody Map<String, String> codeMap) {
+//        try {
+//            Optional<Course> optionalCourse = courseService.getCourseById(courseId);
+//            if (optionalCourse.isPresent()) {
+//                Course course = optionalCourse.get();
+//                course.setAttendanceCode(codeMap.get("attendanceCode"));
+//                Course updatedCourse = courseService.saveCourse(course);
+//                return ResponseEntity.ok(updatedCourse);
+//            } else {
+//                return ResponseEntity.notFound().build();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace(); // Log the exception details for debugging
+//            return ResponseEntity.status(500).body(null);
+//        }
+//    }
+
     @PutMapping("/updateAttendanceCode/{courseId}")
     public ResponseEntity<Course> updateAttendanceCode(@PathVariable int courseId, @RequestBody Map<String, String> codeMap) {
         try {
-            Optional<Course> optionalCourse = courseService.getCourseById(courseId);
-            if (optionalCourse.isPresent()) {
-                Course course = optionalCourse.get();
-                course.setAttendanceCode(codeMap.get("attendanceCode"));
-                Course updatedCourse = courseService.saveCourse(course);
+            String attendanceCode = codeMap.get("attendanceCode");
+            Course updatedCourse = courseService.generateAttendanceCode(courseId, attendanceCode);
+            if (updatedCourse != null) {
                 return ResponseEntity.ok(updatedCourse);
             } else {
                 return ResponseEntity.notFound().build();

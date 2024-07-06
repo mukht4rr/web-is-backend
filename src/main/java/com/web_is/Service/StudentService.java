@@ -17,9 +17,6 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     public void saveStudent(Student student) {
 //        student.setPassword(passwordEncoder.encode(student.getPassword()));
         studentRepository.save(student);
@@ -36,13 +33,4 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String registrationNumber) throws UsernameNotFoundException {
-//        Student student = findByRegistrationNumber(registrationNumber);
-//        if (student == null) {
-//            throw new UsernameNotFoundException("Student not found");
-//        }
-//        return (UserDetails) student;
-//    }
 }
