@@ -83,25 +83,6 @@ public class CourseController {
         }
     }
 
-    // UPDATE THE ATTENDANCE CODE
-//    @PutMapping("/updateAttendanceCode/{courseId}")
-//    public ResponseEntity<Course> updateAttendanceCode(@PathVariable int courseId, @RequestBody Map<String, String> codeMap) {
-//        try {
-//            Optional<Course> optionalCourse = courseService.getCourseById(courseId);
-//            if (optionalCourse.isPresent()) {
-//                Course course = optionalCourse.get();
-//                course.setAttendanceCode(codeMap.get("attendanceCode"));
-//                Course updatedCourse = courseService.saveCourse(course);
-//                return ResponseEntity.ok(updatedCourse);
-//            } else {
-//                return ResponseEntity.notFound().build();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace(); // Log the exception details for debugging
-//            return ResponseEntity.status(500).body(null);
-//        }
-//    }
-
     @PutMapping("/updateAttendanceCode/{courseId}")
     public ResponseEntity<Course> updateAttendanceCode(@PathVariable int courseId, @RequestBody Map<String, String> codeMap) {
         try {

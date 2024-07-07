@@ -38,13 +38,20 @@ public class AttendanceController {
             return ResponseEntity.status(409).body("Already Attend");
         }
 
-        // Retrieve the associated Enroll, Student, and Course entities
+        // Retrieve the associated Course entity
+        Course course = courseRepository.findById(attendance.getCourse_id())
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        // Check if the attendanceCode matches and the course status is not EXPIRED
+        if (!course.getAttendanceCode().equals(attendance.getAttendanceCode()) || course.getAttendanceCodeStatus().equals("EXPIRED")) {
+            return ResponseEntity.status(400).body("Invalid attendance code or code has expired");
+        }
+
+        // Retrieve the associated Enroll and Student entities
         Enroll enroll = enrollRepository.findById(attendance.getEnroll().getEnrollId())
                 .orElseThrow(() -> new RuntimeException("Enroll not found"));
         Student student = studentRepository.findById(attendance.getStudent_id())
                 .orElseThrow(() -> new RuntimeException("Student not found"));
-        Course course = courseRepository.findById(attendance.getCourse_id())
-                .orElseThrow(() -> new RuntimeException("Course not found"));
 
         // Set the entities to the Attendance object
         attendance.setEnroll(enroll);
@@ -64,6 +71,12 @@ public class AttendanceController {
     @GetMapping("/student/{studentId}")
     public ResponseEntity<List<Attendance>> getAttendancesByStudentId(@PathVariable Long studentId) {
         List<Attendance> attendances = attendanceService.getAttendancesByStudentId(studentId);
+        return ResponseEntity.ok(attendances);
+    }
+
+    @GetMapping("/lecturer/{lecturerId}")
+    public ResponseEntity<List<Attendance>> getAttendancesByLecturerId(@PathVariable Long lecturerId) {
+        List<Attendance> attendances = attendanceService.getAttendancesByLecturerId(lecturerId);
         return ResponseEntity.ok(attendances);
     }
 

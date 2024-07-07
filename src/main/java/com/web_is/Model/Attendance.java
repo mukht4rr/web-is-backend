@@ -2,6 +2,8 @@ package com.web_is.Model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "attendance")
 public class Attendance {
@@ -23,6 +25,9 @@ public class Attendance {
 
     @Column(name = "attendance_code")
     private String attendanceCode;
+
+    @Column(name = "timestamp", nullable = false, updatable = false)
+    private LocalDateTime timestamp;
 
     // Getters and setters
 
@@ -65,4 +70,18 @@ public class Attendance {
     public void setAttendanceCode(String attendanceCode) {
         this.attendanceCode = attendanceCode;
     }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        timestamp = LocalDateTime.now();
+    }
+
 }

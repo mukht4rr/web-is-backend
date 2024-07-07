@@ -21,12 +21,16 @@ public class AttendanceService {
         return attendanceRepository.findAll();
     }
 
-    public boolean existsByAttendanceCodeAndStudentId(String attendanceCode, Long studentId) {
-        return attendanceRepository.existsByAttendanceCodeAndStudentId(attendanceCode, studentId);
+    public boolean existsByAttendanceCodeAndStudentId(String attendanceCode, Long student_id) {
+        return attendanceRepository.existsByAttendanceCodeAndStudentId(attendanceCode, student_id);
     }
 
     public List<Attendance> getAttendancesByStudentId(Long studentId) {
         return attendanceRepository.findByStudentId(studentId);
+    }
+
+    public List<Attendance> getAttendancesByLecturerId(Long lecturerId) {
+        return attendanceRepository.findByLecturerId(lecturerId);
     }
 
 }
