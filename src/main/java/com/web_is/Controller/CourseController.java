@@ -1,5 +1,6 @@
 package com.web_is.Controller;
 
+import org.springframework.http.HttpStatus;
 import com.web_is.Service.CourseService;
 import com.web_is.Model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class CourseController {
     }
 
     //UPDATE THE COURSE STATUS
-    @PutMapping("/update/{courseId}")
+    @PutMapping("/updateStatus/{courseId}")
     public ResponseEntity<Course> updateCourseStatus(@PathVariable int courseId, @RequestBody Map<String, String> statusMap) {
         try {
             Optional<Course> optionalCourse = courseService.getCourseById(courseId);
@@ -108,6 +109,18 @@ public class CourseController {
         } catch (Exception e) {
             e.printStackTrace(); // Log the exception details for debugging
             return ResponseEntity.status(500).build();
+        }
+    }
+
+    //UPDATE COURSE
+    @PutMapping("/update/{course_id}")
+    public ResponseEntity<Course> updateCourse(@PathVariable("course_id") int courseId, @RequestBody Course course) {
+        course.setCourseId(courseId);
+        Course updatedCourse = courseService.updateCourse(course);
+        if (updatedCourse != null) {
+            return ResponseEntity.ok(updatedCourse);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

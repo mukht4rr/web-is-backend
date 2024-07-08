@@ -41,6 +41,7 @@ public class CourseService {
         return courseRepository.findByStatus(status);
     }
 
+    //method to generate attendance codes
     public Course generateAttendanceCode(int courseId, String code) {
         Optional<Course> optionalCourse = courseRepository.findById(courseId);
         if (optionalCourse.isPresent()) {
@@ -54,6 +55,7 @@ public class CourseService {
         }
     }
 
+    //method that set attendance codes expired automatically after generated in one minute
     @Scheduled(fixedRate = 30000)
     public void expireAttendanceCodes() {
         List<Course> courses = courseRepository.findByAttendanceCodeStatus("ACTIVE");
@@ -65,5 +67,27 @@ public class CourseService {
             }
         }
     }
+
+    //update course
+    public Course updateCourse(Course updatedCourse) {
+        Optional<Course> optionalCourse = courseRepository.findById(updatedCourse.getCourseId());
+        if (optionalCourse.isPresent()) {
+            Course existingCourse = optionalCourse.get();
+            // Update only the fields that are not null in updatedCourse
+            if (updatedCourse.getCourseTitle() != null) {
+                existingCourse.setCourseTitle(updatedCourse.getCourseTitle());
+            }
+            if (updatedCourse.getCourseCode() != null) {
+                existingCourse.setCourseCode(updatedCourse.getCourseCode());
+            }
+            if (updatedCourse.getEnrollmentKey() != null) {
+                existingCourse.setEnrollmentKey(updatedCourse.getEnrollmentKey());
+            }
+            return courseRepository.save(existingCourse);
+        } else {
+            return null;
+        }
+    }
+
 
 }

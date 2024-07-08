@@ -21,7 +21,7 @@ public class Lecturers {
     private String lecturerEmail;
 
     @Column(name = "lecturer_phone")
-    private int lecturerPhone;
+    private String lecturerPhone;
 
     @Column(name = "lecturer_password")
     private String lecturerPassword;
@@ -67,11 +67,11 @@ public class Lecturers {
         this.lecturerEmail = lecturerEmail;
     }
 
-    public int getLecturerPhone(){
+    public String getLecturerPhone(){
         return lecturerPhone;
     }
 
-    public void setLecturerPhone(int lecturerPhone){
+    public void setLecturerPhone(String lecturerPhone){
         this.lecturerPhone = lecturerPhone;
     }
 
